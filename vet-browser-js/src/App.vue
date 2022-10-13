@@ -88,3 +88,23 @@ nav a:first-of-type {
   }
 }
 </style>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+import { PetApi, PetStatusEnum } from "@/generated-sources-openapi/example";
+
+export default defineComponent({
+  created: async function() {
+    console.log(Math.random());
+    const test = new PetApi();
+    const petsByTag = await test.findPetsByTags({ tags: ["test"] });
+    petsByTag.forEach((pet) => {
+      console.log(pet);
+    });
+    const petsByStatus = await test.findPetsByStatus({ status: PetStatusEnum.Sold });
+    petsByStatus.forEach((pet) => {
+      console.log(pet);
+    });
+  }
+});
+</script>
