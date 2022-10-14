@@ -1,0 +1,20 @@
+swagger: "2.0"
+info:
+  title: Zentral Vet Service
+  version: "1.0"
+host: api.server.test
+basePath: /v1
+schemes:
+  - https
+paths:
+  /animals:
+    get:
+      responses:
+        '200':
+          description: OK
+    post:
+      responses:
+        '201':
+          description: Accepted new entry
+        '409':
+          description: Duplicat

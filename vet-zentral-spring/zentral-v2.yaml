@@ -1,0 +1,12 @@
+openapi: "3.0.2"
+info:
+  title: Zentral Vet Service
+  version: "2.0"
+servers:
+  - url: https://api.server.test/v2
+paths:
+  /test:
+    get:
+      responses:
+        '200':
+          description: OK
