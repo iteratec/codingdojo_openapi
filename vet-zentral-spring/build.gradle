@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id "org.openapi.generator"
+    id 'org.springframework.boot' version '2.7.2'
 }
 java {
     toolchain {
@@ -21,11 +22,18 @@ repositories {
     mavenCentral()
 }
 
+springBoot {
+    mainClass = 'com.iteratec.codingdojo.openapi.zentral.ZentralMain'
+}
 
 dependencies {
     compileClasspath("org.openapitools:openapi-generator-gradle-plugin:5.2.1")
 
+    runtimeOnly("com.h2database:h2-mvstore:2.1.210")
+    implementation("javax.xml.bind:jaxb-api:2.3.0")
+
     implementation("org.springframework.boot:spring-boot-starter-webflux:2.7.1")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa:2.7.1")
     implementation("org.springframework:spring-web:5.3.21")
     implementation("org.springframework:spring-core:5.3.21")
     implementation("com.mashape.unirest:unirest-java:1.4.9")
@@ -39,6 +47,12 @@ dependencies {
     implementation("io.reactivex:rxjava-reactive-streams:1.2.1")
     implementation("commons-collections:commons-collections:3.2.2")
     implementation("javax.servlet:javax.servlet-api:4.0.1")
+
+    compileOnly("org.projectlombok:lombok:1.18.24")
+    annotationProcessor("org.projectlombok:lombok:1.18.24")
+    testCompileOnly("org.projectlombok:lombok:1.18.24")
+    testAnnotationProcessor("org.projectlombok:lombok:1.18.24")
+
 
     testImplementation("org.openapitools.openapidiff:openapi-diff-core:2.0.0-beta.8")
 
@@ -79,3 +93,12 @@ task buildV1(type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask) 
 
 compileJava.dependsOn tasks.validateV1, tasks.buildV1
 
+
+task bootRunDev {
+    group = "Application"
+    bootRun.configure {
+        systemProperty "spring.profiles.active", 'local,swagger'
+    }
+}
+bootRunDev.dependsOn 'build'
+bootRunDev.finalizedBy bootRun
