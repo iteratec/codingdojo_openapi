@@ -2,7 +2,10 @@ package com.iteratec.codingdojo.openapi.zentral.data;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface AnimalDao extends CrudRepository<AnimalEntity, Long> {
+import java.util.Optional;
 
+public interface AnimalDao extends CrudRepository<AnimalEntity, Integer> {
+
+    Optional<AnimalEntity> findFirstByName(String name);
 
 }

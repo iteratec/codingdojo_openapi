@@ -6,15 +6,111 @@ host: api.server.test
 basePath: /v1
 schemes:
   - https
+consumes:
+  - application/json
+produces:
+  - application/json
 paths:
   /animals:
     get:
+      description: Fetch the entries from the zentral service.
       responses:
         '200':
           description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Animal'
     post:
+      description: Create a new entry in the zentral service.
+      parameters:
+        - name: creationObj
+          required: true
+          in: body
+          schema:
+            $ref: '#/definitions/RegisterAnimal'
       responses:
         '201':
           description: Accepted new entry
         '409':
           description: Duplicat
+  /animals/{id}:
+    get:
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true
+          description: the registered animals id.
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Animal'
+
+definitions:
+  Animal:
+    type: object
+    properties:
+      id:
+        type: integer
+        example: 1923
+      name:
+        type: string
+        minLength: 3
+        maxLength: 36
+        example: 'Unicorn'
+      maxAge:
+        type: integer
+        minimum: 1
+        maximum: 3500
+        example: 318
+      pet:
+        type: boolean
+    required:
+      - id
+      - name
+      - maxAge
+  RegisterAnimal:
+    type: object
+    properties:
+      name:
+        type: string
+        minLength: 3
+        maxLength: 36
+        example: 'Dragon'
+      maxAge:
+        type: integer
+        default: 1
+        maximum: 3500
+        example: 3500
+      additionalInfo:
+        type: object
+        properties:
+          aggressive:
+            type: boolean
+            default: false
+          venomous:
+            type: boolean
+            default: false
+          indigenous:
+            type: boolean
+            default: true
+          mystical:
+            type: boolean
+            default: false
+    required:
+      - name
+  UpdateAnimal:
+    type: object
+    properties:
+      name:
+        type: string
+        minimum: 3
+        maximum: 36
+        example: 'Dragon'
+      maxAge:
+        type: integer
+        minimum: 1
+        maximum: 3500
+        example: 25
