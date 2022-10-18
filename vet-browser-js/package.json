@@ -15,7 +15,6 @@
     "preview": "vite preview --port 4173",
     "pretest:unit": "npm run build:openapi",
     "test:unit": "vitest --environment jsdom",
-    "prebuild-only": "npm run build:openapi",
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
