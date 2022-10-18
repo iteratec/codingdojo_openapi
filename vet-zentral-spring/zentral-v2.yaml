@@ -3,10 +3,140 @@ info:
   title: Zentral Vet Service
   version: "2.0"
 servers:
-  - url: https://api.server.test/v2
+  - url: https://api.server.test
 paths:
-  /test:
+  /v2/animals:
     get:
+      operationId: fetchAnimalTypes
       responses:
         '200':
-          description: OK
+          $ref: '#/components/responses/ListOfRegisteredAnimals'
+    post:
+      operationId: registerAnimalType
+      requestBody:
+        description: The animal to be added to the library
+        required: true
+        $ref: '#/components/requestBodies/AnimalCreation'
+      responses:
+        '201':
+          $ref: '#/components/responses/CreatedAnimal'
+  /v2/animals/{id}:
+    get:
+      operationId: fetchAnimalTypeById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/AnimalId'
+      responses:
+        '200':
+          $ref: '#/components/responses/RegisteredAnimal'
+
+components:
+  schemas:
+    AnimalId:
+      type: integer
+      format: int32
+      example: 9212
+    AnimalRegistrationType:
+      enum:
+        - Pet
+        - Exotic
+      default: Pet
+    HusbandryRuleType:
+      enum:
+        - Unlimited
+        - RegistrationRequired
+        - PermissionRequired
+        - Forbidden
+      default: Unlimited
+    AnimalName:
+      type: string
+      minLength: 3
+      maxLength: 36
+      example: 'Cat'
+    MaximumAge:
+      description: maximum age in years for a species.
+      type: integer
+      minimum: 1
+      maximum: 3500
+      example: 35
+    RegistrationDate:
+      description: creation date of this entry.
+      type: string
+      format: date-time
+      example: '2021-10-18T08:33:15.188+02:00'
+    AnimalEntry:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/AnimalId'
+        name:
+          $ref: '#/components/schemas/AnimalName'
+        ownershipLimits:
+          $ref: '#/components/schemas/HusbandryRuleType'
+        ownershipLaw:
+          $ref: '#/components/schemas/AnimalRegistrationType'
+        registered:
+          $ref: '#/components/schemas/RegistrationDate'
+        expectedMaxAge:
+          $ref: '#/components/schemas/MaximumAge'
+  requestBodies:
+    AnimalCreation:
+      description: Inputs for the creation of a new entry in the library
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                $ref: '#/components/schemas/AnimalName'
+              maxAge:
+                $ref: '#/components/schemas/MaximumAge'
+              additionalInfo:
+                type: object
+                properties:
+                  aggressive:
+                    type: boolean
+                    default: false
+                  venomous:
+                    type: boolean
+                    default: false
+                  indigenous:
+                    type: boolean
+                    default: true
+                  livestock:
+                    type: boolean
+                    default: false
+                  mystical:
+                    type: boolean
+                    default: false
+
+  responses:
+    CreatedAnimal:
+      description: created animal reference
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              createdId:
+                $ref: '#/components/schemas/AnimalId'
+              name:
+                $ref: '#/components/schemas/AnimalName'
+    RegisteredAnimal:
+      description: details about a specific animal.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AnimalEntry'
+    ListOfRegisteredAnimals:
+      description: list containing details about multiple animals.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/AnimalEntry'
