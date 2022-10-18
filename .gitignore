@@ -1,1 +1,5 @@
 .DS_Store
+/vet-zentral-spring/build/
+/vet-zentral-spring/generated/
+/vet-zentral-spring/.gradle/
+/vet-zentral-spring/.idea/
