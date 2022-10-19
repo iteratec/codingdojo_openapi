@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from "vue-router";
+import {RouterLink, RouterView} from "vue-router";
 import HelloWorld from "./components/HelloWorld.vue";</script>
 
 <template>
   <header>
     <img
-      alt="Vue logo"
-      class="logo"
-      src="@/assets/logo.svg"
-      width="125"
-      height="125"
+        alt="Vue logo"
+        class="logo"
+        src="@/assets/logo.svg"
+        width="125"
+        height="125"
     />
 
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+      <HelloWorld msg="You did it!"/>
 
       <nav>
         <RouterLink to="/">Home</RouterLink>
@@ -22,7 +22,7 @@ import HelloWorld from "./components/HelloWorld.vue";</script>
     </div>
   </header>
 
-  <RouterView />
+  <RouterView/>
 </template>
 
 <style scoped>
@@ -90,18 +90,18 @@ nav a:first-of-type {
 </style>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import { PetApi, PetStatusEnum } from "@/generated-sources-openapi/example";
+import {defineComponent} from "vue";
+import {PetApi, PetStatusEnum} from "@/generated-sources-openapi/example";
 
 export default defineComponent({
-  created: async function() {
+  created: async function () {
     console.log(Math.random());
     const test = new PetApi();
-    const petsByTag = await test.findPetsByTags({ tags: ["test"] });
+    const petsByTag = await test.findPetsByTags({tags: ["dogs"]});
     petsByTag.forEach((pet) => {
       console.log(pet);
     });
-    const petsByStatus = await test.findPetsByStatus({ status: PetStatusEnum.Sold });
+    const petsByStatus = await test.findPetsByStatus({status: PetStatusEnum.Available});
     petsByStatus.forEach((pet) => {
       console.log(pet);
     });
