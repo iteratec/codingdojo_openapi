@@ -91,7 +91,7 @@ nav a:first-of-type {
 
 <script lang="ts">
 import {defineComponent} from "vue";
-import {PetApi, PetStatusEnum} from "@/generated-sources-openapi/example";
+import {PetApi, PetStatusEnum} from "./generated-sources-openapi/example";
 
 export default defineComponent({
   created: async function () {
