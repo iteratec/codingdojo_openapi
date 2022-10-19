@@ -1,0 +1,9 @@
+pluginManagement {
+    plugins {
+        id "org.openapi.generator" version "6.0.1"
+    }
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}

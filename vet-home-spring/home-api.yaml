@@ -4,15 +4,22 @@ info:
   version: "1.0"
 servers:
   - url: https://api.server.test
+tags:
+  - shelter
+  - adoption
 paths:
   /v1/animals/sheltered:
     get:
       operationId: fetchShelteredAnimals
+      tags:
+        - shelter
       responses:
         '200':
           $ref: '#/components/responses/ListOfShelteredAnimals'
     post:
       operationId: registerShelteredAnimal
+      tags:
+        - shelter
       requestBody:
         $ref: '#/components/requestBodies/ShelterRequest'
       responses:
@@ -21,12 +28,16 @@ paths:
   /v1/animals/adopted:
     get:
       operationId: fetchAdoptedAnimals
+      tags:
+        - adoption
       responses:
         '200':
           $ref: '#/components/responses/ListOfAdoptedAnimals'
   /v1/animals/sheltered/{animalId}:
     get:
       operationId: fetchAnimalById
+      tags:
+        - shelter
       parameters:
         - $ref: '#/components/parameters/AnimalIdInPath'
       responses:
@@ -37,6 +48,8 @@ paths:
   /v1/animals/sheltered/{animalId}/adopt:
     post:
       operationId: adoptAnimal
+      tags:
+        - adoption
       parameters:
         - $ref: '#/components/parameters/AnimalIdInPath'
       requestBody:
