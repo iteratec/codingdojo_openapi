@@ -8,3 +8,5 @@ Setup for the workshop:
 * implement `com.iteratec.codingdojo.openapi.shelter.delegates.AdoptionDelegateImpl.fetchAdoptedAnimals`
 
 This service will reset the database on every restart so long as the property `spring.sql.init.mode` is given. Remove the property from the `application.properties`to keep the data.
+
+The service provides a swagger ui to interact with under: http://localhost:8090/swagger-ui/index.html
