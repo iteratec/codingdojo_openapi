@@ -3,6 +3,8 @@
     <include resource="org/springframework/boot/logging/logback/defaults.xml" />
     <logger name="com.iteratec.codingdojo" level="DEBUG" />
     <logger name="org.hibernate" level="INFO" />
+    <logger name="com.zaxxer.hikari" level="INFO" />
+    <logger name="io.netty" level="INFO" />
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>

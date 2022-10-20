@@ -5,8 +5,10 @@ info:
 servers:
   - url: https://api.server.test
 tags:
-  - shelter
-  - adoption
+  - name: shelter
+    description: Endpoints around the animals in the shelter.
+  - name: adoption
+    description: Endpoints related to the animal adoptions.
 paths:
   /v1/animals/sheltered:
     get:
@@ -59,8 +61,6 @@ paths:
           $ref: '#/components/responses/AdoptionAnswer'
         '406':
           description: the animal was already adopted, sorry
-
-
 
 components:
   schemas:
@@ -201,3 +201,4 @@ components:
             oneOf:
               - $ref: '#/components/schemas/PositiveAdoptionAnswer'
               - $ref: '#/components/schemas/NegativeAdoptionAnswer'
+
