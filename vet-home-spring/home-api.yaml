@@ -1,12 +1,204 @@
 openapi: "3.0.2"
 info:
-  title: Vet Home
+  title: Vet Home - Animal Shelter service
   version: "1.0"
 servers:
-  - url: https://api.server.test/v1
+  - url: https://api.server.test
+tags:
+  - name: shelter
+    description: Endpoints around the animals in the shelter.
+  - name: adoption
+    description: Endpoints related to the animal adoptions.
 paths:
-  /test:
+  /v1/animals/sheltered:
     get:
+      operationId: fetchShelteredAnimals
+      tags:
+        - shelter
       responses:
         '200':
-          description: OK
+          $ref: '#/components/responses/ListOfShelteredAnimals'
+    post:
+      operationId: registerShelteredAnimal
+      tags:
+        - shelter
+      requestBody:
+        $ref: '#/components/requestBodies/ShelterRequest'
+      responses:
+        '201':
+          $ref: '#/components/responses/RequestShelterResponse'
+  /v1/animals/adopted:
+    get:
+      operationId: fetchAdoptedAnimals
+      tags:
+        - adoption
+      responses:
+        '200':
+          $ref: '#/components/responses/ListOfAdoptedAnimals'
+  /v1/animals/sheltered/{animalId}:
+    get:
+      operationId: fetchAnimalById
+      tags:
+        - shelter
+      parameters:
+        - $ref: '#/components/parameters/AnimalIdInPath'
+      responses:
+        '200':
+          $ref: '#/components/responses/ShelteredAnimal'
+        '404':
+          description: could no longer find the animal in the shelter, was it adopted?
+  /v1/animals/sheltered/{animalId}/adopt:
+    post:
+      operationId: adoptAnimal
+      tags:
+        - adoption
+      parameters:
+        - $ref: '#/components/parameters/AnimalIdInPath'
+      requestBody:
+        $ref: '#/components/requestBodies/AdoptionRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/AdoptionAnswer'
+        '406':
+          description: the animal was already adopted, sorry
+
+components:
+  schemas:
+    AnimalId:
+      type: string
+      format: uuid
+      example: 6e405434-6bd6-45d1-b20f-c1915c2246b5
+    AnimalName:
+      type: string
+      minLength: 3
+      maxLength: 36
+      example: 'Cat'
+    DateTime:
+      description: creation date of this entry.
+      type: string
+      format: date-time
+      example: '2021-10-18T08:33:15.188+02:00'
+    BirthDate:
+      description: date of birth of the animal.
+      type: string
+      format: date
+      example: '2021-01-30'
+    HandlerName:
+      type: string
+      minLength: 1
+      maxLength: 120
+    PLZ:
+      type: string
+      pattern: '[1-9][0-9]{3}'
+    ShelteredAnimal:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/AnimalId'
+        name:
+          $ref: '#/components/schemas/AnimalName'
+        registered:
+          $ref: '#/components/schemas/DateTime'
+        birthDate:
+          $ref: '#/components/schemas/BirthDate'
+        readyForAdoption:
+          description: indicator if this animal can be adopted right away.
+          type: boolean
+    AdoptedAnimal:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/AnimalId'
+        name:
+          $ref: '#/components/schemas/AnimalName'
+        registered:
+          $ref: '#/components/schemas/DateTime'
+        adopted:
+          $ref: '#/components/schemas/DateTime'
+        birthDate:
+          $ref: '#/components/schemas/BirthDate'
+    PositiveAdoptionAnswer:
+      type: object
+      properties:
+        pickupShelterPlz:
+          $ref: '#/components/schemas/PLZ'
+    NegativeAdoptionAnswer:
+      type: object
+      properties:
+        rejectReason:
+          type: string
+  parameters:
+    AnimalIdInPath:
+      name: animalId
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/AnimalId'
+
+  requestBodies:
+    ShelterRequest:
+      description: Inputs for the creation of a new entry in the library
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                $ref: '#/components/schemas/AnimalName'
+              birthdate:
+                $ref: '#/components/schemas/BirthDate'
+    AdoptionRequest:
+      description: Required data for an adoption.
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              adopteeName:
+                $ref: '#/components/schemas/HandlerName'
+              adopteePlz:
+                $ref: '#/components/schemas/PLZ'
+
+  responses:
+    RequestShelterResponse:
+      description: reply to a shelter request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              registeredId:
+                $ref: '#/components/schemas/AnimalId'
+    ShelteredAnimal:
+      description: details about a specific animal.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ShelteredAnimal'
+    ListOfShelteredAnimals:
+      description: list containing details about sheltered animals.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/ShelteredAnimal'
+    ListOfAdoptedAnimals:
+      description: list containing details about adopted animals.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/AdoptedAnimal'
+    AdoptionAnswer:
+      description: positiv answer to an adoption request.
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - $ref: '#/components/schemas/PositiveAdoptionAnswer'
+              - $ref: '#/components/schemas/NegativeAdoptionAnswer'
+
