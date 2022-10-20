@@ -26,14 +26,23 @@ springBoot {
     mainClass = 'com.iteratec.codingdojo.openapi.zentral.ZentralMain'
 }
 
+configurations.all {
+    exclude group: "ch.qos.logback"
+}
+
 dependencies {
     compileClasspath("org.openapitools:openapi-generator-gradle-plugin:5.2.1")
 
     implementation("org.springframework.boot:spring-boot-starter-webflux:2.7.1")
+    implementation("org.springframework.boot:spring-boot-starter-web:2.7.1")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa:2.7.1")
     implementation("org.springframework.boot:spring-boot-starter-validation:2.7.1")
+    implementation("org.springframework.boot:spring-boot-starter-actuator:2.7.1")
     implementation("org.springframework:spring-web:5.3.21")
     implementation("org.springframework:spring-core:5.3.21")
+
+    runtimeOnly "org.springdoc:springdoc-openapi-ui:1.6.9"
+    runtimeOnly "org.springdoc:springdoc-openapi-webmvc-core:1.6.9"
 
     runtimeOnly("com.h2database:h2-mvstore:2.1.210")
 
@@ -148,7 +157,7 @@ bootRunV1V2.finalizedBy bootRun
 task bootRunV2 {
     group = "Application"
     bootRun.configure {
-        systemProperty "spring.profiles.active", 'local,V1,V2,swagger'
+        systemProperty "spring.profiles.active", 'local,V2,swagger'
     }
 }
 bootRunV2.dependsOn 'build'

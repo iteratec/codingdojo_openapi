@@ -12,3 +12,5 @@ in the console from the root of this project run:
 the service will create a file based DB on the first run, thanks to the property `spring.sql.init.mode` in
 the `application.properties`. This needs to be disabled when the file based DB is kept between runs - otherwise there
 will be an error on start up, where the init db script fails.
+
+The service provides a swagger ui to interact with under: http://localhost:8080/swagger-ui/index.html
