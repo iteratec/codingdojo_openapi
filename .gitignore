@@ -1,4 +1,10 @@
+.DS_Store
 /vet-zentral-spring/build/
 /vet-zentral-spring/generated/
 /vet-zentral-spring/.gradle/
 /vet-zentral-spring/.idea/
+
+/vet-home-spring/build/
+/vet-home-spring/generated/
+/vet-home-spring/.gradle/
+/vet-home-spring/.idea/

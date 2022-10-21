@@ -26,16 +26,27 @@ springBoot {
     mainClass = 'com.iteratec.codingdojo.openapi.zentral.ZentralMain'
 }
 
+configurations.all {
+    exclude group: "ch.qos.logback"
+}
+
 dependencies {
     compileClasspath("org.openapitools:openapi-generator-gradle-plugin:5.2.1")
 
-    runtimeOnly("com.h2database:h2-mvstore:2.1.210")
-    implementation("javax.xml.bind:jaxb-api:2.3.0")
-
     implementation("org.springframework.boot:spring-boot-starter-webflux:2.7.1")
+    implementation("org.springframework.boot:spring-boot-starter-web:2.7.1")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa:2.7.1")
+    implementation("org.springframework.boot:spring-boot-starter-validation:2.7.1")
+    implementation("org.springframework.boot:spring-boot-starter-actuator:2.7.1")
     implementation("org.springframework:spring-web:5.3.21")
     implementation("org.springframework:spring-core:5.3.21")
+
+    runtimeOnly "org.springdoc:springdoc-openapi-ui:1.6.9"
+    runtimeOnly "org.springdoc:springdoc-openapi-webmvc-core:1.6.9"
+
+    runtimeOnly("com.h2database:h2-mvstore:2.1.210")
+
+    implementation("javax.xml.bind:jaxb-api:2.3.0")
     implementation("com.mashape.unirest:unirest-java:1.4.9")
     implementation("org.apache.httpcomponents:httpclient:4.5.13")
     implementation("commons-codec:commons-codec:1.15")
@@ -53,28 +64,29 @@ dependencies {
     testCompileOnly("org.projectlombok:lombok:1.18.24")
     testAnnotationProcessor("org.projectlombok:lombok:1.18.24")
 
-
     testImplementation("org.openapitools.openapidiff:openapi-diff-core:2.0.0-beta.8")
-
+    testImplementation("org.springframework.boot:spring-boot-starter-test:2.7.1")
 }
 
+// register generated folder for clean up
+clean {
+    delete 'generated'
+}
 
+// OPEN API configurations
 tasks.withType(org.openapitools.generator.gradle.plugin.tasks.GenerateTask) {
     outputs.upToDateWhen { false }
     outputs.cacheIf { false }
 }
+
 task validateV1(type: org.openapitools.generator.gradle.plugin.tasks.ValidateTask) {
     inputSpec = "$rootDir/zentral-v1.yaml".toString()
-    recommend = true
-}
-
-task validateV2(type: org.openapitools.generator.gradle.plugin.tasks.ValidateTask) {
-    inputSpec = "$rootDir/zentral-v2.yaml".toString()
     recommend = true
 }
 task buildV1(type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask) {
     verbose = false
     generatorName = "spring"
+    library = "spring-boot"
     inputSpec = "$rootDir/zentral-v1.yaml".toString()
     outputDir = "$rootDir/generated".toString()
     apiPackage = "com.iteratec.codingdojo.openapi.zentral.generated.v1.api"
@@ -87,18 +99,66 @@ task buildV1(type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask) 
             dateLibrary: "java8",
             java8: "true",
             sortParamsByRequiredFlag: "true",
-            openApiNullable: "false"
+            openApiNullable: "false",
+            useBeanValidation: "true",
+            performBeanValidation: "true"
     ]
 }
 
+task validateV2(type: org.openapitools.generator.gradle.plugin.tasks.ValidateTask) {
+    inputSpec = "$rootDir/zentral-v2.yaml".toString()
+    recommend = true
+}
+task buildV2(type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask) {
+    verbose = false
+    generatorName = "spring"
+    library = "spring-boot"
+    inputSpec = "$rootDir/zentral-v2.yaml".toString()
+    outputDir = "$rootDir/generated".toString()
+    apiPackage = "com.iteratec.codingdojo.openapi.zentral.generated.v2.api"
+    modelPackage = "com.iteratec.codingdojo.openapi.zentral.generated.v2.model"
+    modelNamePrefix = "Dto"
+    skipOverwrite = false
+    configOptions = [
+            delegatePattern: "true",
+            serializationLibrary: "jackson",
+            dateLibrary: "java8",
+            java8: "true",
+            sortParamsByRequiredFlag: "true",
+            openApiNullable: "false",
+            useBeanValidation: "true",
+            performBeanValidation: "true"
+    ]
+}
+
+
 compileJava.dependsOn tasks.validateV1, tasks.buildV1
+compileJava.dependsOn tasks.validateV2, tasks.buildV2
 
 
-task bootRunDev {
+task bootRunV1 {
     group = "Application"
     bootRun.configure {
-        systemProperty "spring.profiles.active", 'local,swagger'
+        systemProperty "spring.profiles.active", 'local,V1,swagger'
     }
 }
-bootRunDev.dependsOn 'build'
-bootRunDev.finalizedBy bootRun
+bootRunV1.dependsOn 'build'
+bootRunV1.finalizedBy bootRun
+
+task bootRunV1V2 {
+    group = "Application"
+    bootRun.configure {
+        systemProperty "spring.profiles.active", 'local,V1,V2,swagger'
+    }
+}
+bootRunV1V2.dependsOn 'build'
+bootRunV1V2.finalizedBy bootRun
+
+task bootRunV2 {
+    group = "Application"
+    bootRun.configure {
+        systemProperty "spring.profiles.active", 'local,V2,swagger'
+    }
+}
+bootRunV2.dependsOn 'build'
+bootRunV2.finalizedBy bootRun

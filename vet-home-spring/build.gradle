@@ -1,0 +1,136 @@
+plugins {
+    id 'java'
+    id "org.openapi.generator"
+    id 'org.springframework.boot' version '2.7.2'
+}
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+compileJava {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+sourceSets {
+    main.java.srcDirs = [
+            'src/main/java',
+            'generated/src/main/java'
+    ]
+}
+repositories {
+    mavenCentral()
+}
+
+springBoot {
+    mainClass = 'com.iteratec.codingdojo.openapi.shelter.VetHomeMain'
+}
+
+dependencies {
+    compileClasspath("org.openapitools:openapi-generator-gradle-plugin:5.2.1")
+
+    implementation("org.springframework.boot:spring-boot-starter-webflux:2.7.1")
+    implementation("org.springframework.boot:spring-boot-starter-web:2.7.1")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa:2.7.1")
+    implementation("org.springframework.boot:spring-boot-starter-validation:2.7.1")
+    implementation("org.springframework.boot:spring-boot-starter-actuator:2.7.1")
+    implementation("org.springframework:spring-web:5.3.21")
+    implementation("org.springframework:spring-core:5.3.21")
+
+    runtimeOnly("org.springdoc:springdoc-openapi-ui:1.6.9")
+    runtimeOnly("org.springdoc:springdoc-openapi-webmvc-core:1.6.9")
+
+    runtimeOnly("com.h2database:h2-mvstore:2.1.210")
+
+    implementation("javax.xml.bind:jaxb-api:2.3.0")
+    implementation("com.mashape.unirest:unirest-java:1.4.9")
+    implementation("org.apache.httpcomponents:httpclient:4.5.13")
+    implementation("commons-codec:commons-codec:1.15")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.13.2.2")
+    implementation("io.jsonwebtoken:jjwt-impl:0.11.2")
+    implementation("io.jsonwebtoken:jjwt-api:0.11.2")
+    implementation("io.jsonwebtoken:jjwt-jackson:0.11.2")
+    implementation("io.reactivex:rxjava:1.3.8")
+    implementation("io.reactivex:rxjava-reactive-streams:1.2.1")
+    implementation("commons-collections:commons-collections:3.2.2")
+    implementation("javax.servlet:javax.servlet-api:4.0.1")
+
+    compileOnly("org.projectlombok:lombok:1.18.24")
+    annotationProcessor("org.projectlombok:lombok:1.18.24")
+    testCompileOnly("org.projectlombok:lombok:1.18.24")
+    testAnnotationProcessor("org.projectlombok:lombok:1.18.24")
+
+    testImplementation("org.openapitools.openapidiff:openapi-diff-core:2.0.0-beta.8")
+    testImplementation("org.springframework.boot:spring-boot-starter-test:2.7.1")
+}
+
+// register generated folder for clean up
+clean {
+    delete 'generated'
+}
+
+// OPEN API configurations
+tasks.withType(org.openapitools.generator.gradle.plugin.tasks.GenerateTask) {
+    outputs.upToDateWhen { false }
+    outputs.cacheIf { false }
+}
+
+task validateApi(type: org.openapitools.generator.gradle.plugin.tasks.ValidateTask) {
+    inputSpec = "$rootDir/home-api.yaml"
+    recommend = true
+}
+task buildApi(type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask) {
+    verbose = false
+    generatorName = "spring"
+    library = "spring-boot"
+    inputSpec = "$rootDir/home-api.yaml"
+    outputDir = "$rootDir/generated"
+    apiPackage = "com.iteratec.codingdojo.openapi.shelter.generated.api"
+    modelPackage = "com.iteratec.codingdojo.openapi.shelter.generated.model"
+    modelNameSuffix = "Dto"
+    skipOverwrite = false
+    configOptions = [
+            delegatePattern: "true",
+            serializationLibrary: "jackson",
+            dateLibrary: "java8",
+            java8: "true",
+            sortParamsByRequiredFlag: "true",
+            openApiNullable: "false",
+            useBeanValidation: "true",
+            performBeanValidation: "true",
+            useTags: "true"
+    ]
+}
+
+task buildZentralClient(type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask) {
+    verbose = false
+    generatorName = "java"
+    library = "webclient"
+    inputSpec = "$rootDir/zentral-v1.yaml".toString()
+    outputDir = "$rootDir/generated".toString()
+    apiPackage = "com.iteratec.codingdojo.openapi.zentral.generated.api"
+    modelPackage = "com.iteratec.codingdojo.openapi.zentral.generated.model"
+    modelNamePrefix = "Ext"
+    skipOverwrite = false
+    configOptions = [
+            serializationLibrary: "jackson",
+            dateLibrary: "java8",
+            java8: "true",
+            sortParamsByRequiredFlag: "true",
+            openApiNullable: "false",
+    ]
+}
+
+
+compileJava.dependsOn tasks.validateApi, tasks.buildApi
+compileJava.dependsOn tasks.buildZentralClient
+
+
+task bootRunLocal {
+    group = "Application"
+    bootRun.configure {
+        systemProperty "spring.profiles.active", 'local,swagger'
+    }
+}
+bootRunLocal.dependsOn 'build'
+bootRunLocal.finalizedBy bootRun
