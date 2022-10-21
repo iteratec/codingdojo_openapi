@@ -138,8 +138,10 @@ compileJava.dependsOn tasks.validateV2, tasks.buildV2
 
 task bootRunV1 {
     group = "Application"
-    bootRun.configure {
-        systemProperty "spring.profiles.active", 'local,V1,swagger'
+    doFirst {
+        tasks.bootRun.configure {
+            systemProperty("spring.profiles.active", "V1,swagger")
+        }
     }
 }
 bootRunV1.dependsOn 'build'
@@ -147,8 +149,10 @@ bootRunV1.finalizedBy bootRun
 
 task bootRunV1V2 {
     group = "Application"
-    bootRun.configure {
-        systemProperty "spring.profiles.active", 'local,V1,V2,swagger'
+    doFirst {
+        tasks.bootRun.configure {
+            systemProperty("spring.profiles.active", "V1,V2,swagger")
+        }
     }
 }
 bootRunV1V2.dependsOn 'build'
@@ -156,8 +160,10 @@ bootRunV1V2.finalizedBy bootRun
 
 task bootRunV2 {
     group = "Application"
-    bootRun.configure {
-        systemProperty "spring.profiles.active", 'local,V2,swagger'
+    doFirst {
+        tasks.bootRun.configure {
+            systemProperty("spring.profiles.active", "V2,swagger")
+        }
     }
 }
 bootRunV2.dependsOn 'build'
