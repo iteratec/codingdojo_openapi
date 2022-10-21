@@ -1,0 +1,92 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/vakzin/{id}": {
+            "get": {
+                "description": "get vakzination by AnimalID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "vakzin"
+                ],
+                "summary": "Show an vakzination",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Animal ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Vakzin"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "adds vakzination by AnimalID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "vakzin"
+                ],
+                "summary": "Adds an vakzination",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Animal ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "query params",
+                        "name": "reqest",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.Vakzin"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Vakzin"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "model.Vakzin": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "vakzinationdate": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

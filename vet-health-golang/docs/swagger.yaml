@@ -1,0 +1,59 @@
+definitions:
+  model.Vakzin:
+    properties:
+      name:
+        type: string
+      vakzinationdate:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /vakzin/{id}:
+    get:
+      consumes:
+      - application/json
+      description: get vakzination by AnimalID
+      parameters:
+      - description: Animal ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Vakzin'
+      summary: Show an vakzination
+      tags:
+      - vakzin
+    post:
+      consumes:
+      - application/json
+      description: adds vakzination by AnimalID
+      parameters:
+      - description: Animal ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: query params
+        in: body
+        name: reqest
+        required: true
+        schema:
+          $ref: '#/definitions/model.Vakzin'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Vakzin'
+      summary: Adds an vakzination
+      tags:
+      - vakzin
+swagger: "2.0"

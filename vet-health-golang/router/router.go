@@ -4,6 +4,9 @@ import (
 	"vet-health-golang/controller"
 
 	"github.com/gin-gonic/gin"
+
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 func InitRouter() {
@@ -12,7 +15,16 @@ func InitRouter() {
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())
 
-	router.GET("/ping", controller.GetPong)
+	v1 := router.Group("/api/v1/health")
+	{
+		vakzin := v1.Group("/vakzin")
+		{
+			vakzin.GET(":id", controller.GetVazinById)
+			vakzin.POST(":id", controller.AddVazination)
+		}
+	}
 
+	//router.GET("/ping/:animalid", controller.GetPong)
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	router.Run()
 }
