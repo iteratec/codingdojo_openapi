@@ -1,8 +1,18 @@
 {
     "swagger": "2.0",
     "info": {
-        "contact": {}
+        "description": "This is a sample server celler server.",
+        "title": "Swagger Example API",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {},
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0"
     },
+    "host": "localhost:8080",
+    "basePath": "/api/v1",
     "paths": {
         "/vakzin/{id}": {
             "get": {
@@ -81,10 +91,14 @@
             "type": "object",
             "properties": {
                 "name": {
+                    "description": "Name of the vakzination",
                     "type": "string"
                 },
                 "vakzinationdate": {
-                    "type": "string"
+                    "description": "Date when the vakzination was done",
+                    "type": "string",
+                    "format": "date",
+                    "example": "2021-10-18"
                 }
             }
         }

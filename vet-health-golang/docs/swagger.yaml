@@ -1,13 +1,26 @@
+basePath: /api/v1
 definitions:
   model.Vakzin:
     properties:
       name:
+        description: Name of the vakzination
         type: string
       vakzinationdate:
+        description: Date when the vakzination was done
+        example: "2021-10-18"
+        format: date
         type: string
     type: object
+host: localhost:8080
 info:
   contact: {}
+  description: This is a sample server celler server.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Swagger Example API
+  version: "1.0"
 paths:
   /vakzin/{id}:
     get:

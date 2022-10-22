@@ -10,7 +10,12 @@ const docTemplate = `{
     "info": {
         "description": "{{escape .Description}}",
         "title": "{{.Title}}",
+        "termsOfService": "http://swagger.io/terms/",
         "contact": {},
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
         "version": "{{.Version}}"
     },
     "host": "{{.Host}}",
@@ -93,10 +98,14 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "name": {
+                    "description": "Name of the vakzination",
                     "type": "string"
                 },
                 "vakzinationdate": {
-                    "type": "string"
+                    "description": "Date when the vakzination was done",
+                    "type": "string",
+                    "format": "date",
+                    "example": "2021-10-18"
                 }
             }
         }
@@ -105,12 +114,12 @@ const docTemplate = `{
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "",
-	Host:             "",
-	BasePath:         "",
+	Version:          "1.0",
+	Host:             "localhost:8080",
+	BasePath:         "/api/v1",
 	Schemes:          []string{},
-	Title:            "",
-	Description:      "",
+	Title:            "Swagger Example API",
+	Description:      "This is a sample server celler server.",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 }
