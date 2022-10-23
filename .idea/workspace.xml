@@ -4,19 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8ce7b34-d639-4696-8b33-4f3ab717eb20" name="Changes" comment="added swagger">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codingdojo_openapi.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vet-health-golang/Health.go" beforeDir="false" afterPath="$PROJECT_DIR$/vet-health-golang/Health.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vet-health-golang/docs/docs.go" beforeDir="false" afterPath="$PROJECT_DIR$/vet-health-golang/docs/docs.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vet-health-golang/docs/swagger.json" beforeDir="false" afterPath="$PROJECT_DIR$/vet-health-golang/docs/swagger.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vet-health-golang/docs/swagger.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/vet-health-golang/docs/swagger.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vet-health-golang/model/vakzin_model.go" beforeDir="false" afterPath="$PROJECT_DIR$/vet-health-golang/model/vakzin_model.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vet-health-golang/router/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/vet-health-golang/router/router.go" afterDir="false" />
-    </list>
+    <list default="true" id="e8ce7b34-d639-4696-8b33-4f3ab717eb20" name="Changes" comment="swagger now working" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -84,6 +72,9 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/vet-health-golang" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/vet-health-golang" />
       <recent name="$PROJECT_DIR$/vet-health-golang/src/main" />
@@ -103,7 +94,7 @@
       <option name="generatorPath" value="https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/5.0.0/openapi-generator-cli-5.0.0.jar" />
       <option name="jdkPath" value="" />
       <option name="language" value="java" />
-      <option name="specificationPath" value="$PROJECT_DIR$/vet-zentral-spring/zentral-v1.yaml" />
+      <option name="specificationPath" value="$PROJECT_DIR$/vet-zentral-spring/zentral-v2.yaml" />
       <method v="2" />
     </configuration>
   </component>

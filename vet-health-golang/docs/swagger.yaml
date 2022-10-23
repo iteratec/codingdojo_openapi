@@ -1,6 +1,6 @@
 basePath: /api/v1
 definitions:
-  model.Vakzin:
+  Vakzin:
     properties:
       name:
         description: Name of the vakzination
@@ -39,14 +39,14 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/model.Vakzin'
+            $ref: '#/definitions/Vakzin'
       summary: Show an vakzination
       tags:
       - vakzin
     post:
       consumes:
       - application/json
-      description: adds vakzination by AnimalID
+      description: adds vakzination by AnimalID if animal is a Pet
       parameters:
       - description: Animal ID
         in: path
@@ -58,14 +58,14 @@ paths:
         name: reqest
         required: true
         schema:
-          $ref: '#/definitions/model.Vakzin'
+          $ref: '#/definitions/Vakzin'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/model.Vakzin'
+            $ref: '#/definitions/Vakzin'
       summary: Adds an vakzination
       tags:
       - vakzin
