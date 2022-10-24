@@ -5,12 +5,12 @@ info:
 servers:
   - url: https://api.server.test/v1
 paths:
-  /vakzin/{id}:
+  /vaccine/{id}:
     get:
       tags:
-      - vakzin
-      summary: Show an vakzination
-      description: get vakzination by AnimalID
+      - vaccine
+      summary: Show an vaccination
+      description: get vaccination by AnimalID
       parameters:
       - name: id
         in: path
@@ -27,9 +27,9 @@ paths:
                 $ref: '#/components/schemas/Vakzin'
     post:
       tags:
-      - vakzin
-      summary: Adds an vakzination
-      description: adds vakzination by AnimalID if animal is a Pet
+      - vaccine
+      summary: Adds an vaccination
+      description: adds vaccination by AnimalID if animal is a Pet
       parameters:
       - name: id
         in: path
@@ -42,7 +42,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Vakzin'
+              $ref: '#/components/schemas/Vaccine'
         required: true
       responses:
         200:
@@ -50,18 +50,18 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Vakzin'
+                $ref: '#/components/schemas/Vaccine'
       x-codegen-request-body-name: reqest
 components:
   schemas:
-    Vakzin:
+    Vaccine:
       type: object
       properties:
         name:
           type: string
-          description: Name of the vakzination
+          description: Name of the vaccination
         vakzinationdate:
           type: string
-          description: Date when the vakzination was done
+          description: Date when the vaccination was done
           format: date
-          example: 2021-10-18
+          example: 2021-10-18T14:16:00Z

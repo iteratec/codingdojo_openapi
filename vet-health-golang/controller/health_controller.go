@@ -2,52 +2,43 @@ package controller
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 
 	"vet-health-golang/model"
+	"vet-health-golang/service"
 )
 
-// func GetPong(ctx *gin.Context) {
-// 	ctx.JSON(http.StatusOK, gin.H{
-// 		"message": ctx.Param("animalid"),
-// 	})
-// }
+func GetVaccineById(ctx *gin.Context) {
 
-// GetVakzin godoc
-// @Summary      Show an vakzination
-// @Description  get vakzination by AnimalID
-// @Tags         vakzin
-// @Accept       json
-// @Produce      json
-// @Param        id   path      int  true  "Animal ID"
-// @Success      200  {object}  model.Vakzin
-// @Router       /vakzin/{id} [get]
-func GetVazinById(ctx *gin.Context) {
-	ctx.JSON(http.StatusOK, gin.H{
-		"message": ctx.Param("animalid"),
-	})
+	animalId, err := strconv.Atoi(ctx.Param("id"))
+
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "animalid must be a number"})
+		return
+	}
+	ctx.JSON(http.StatusOK, service.GetVaccineById(int32(animalId)))
+
 }
 
-// AddVazination godoc
-// @Summary      Adds an vakzination
-// @Description  adds vakzination by AnimalID
-// @Tags         vakzin
-// @Accept       json
-// @Produce      json
-// @Param        id   path      int  true  "Animal ID"
-// @Param 		 reqest body model.Vakzin true "query params"
-// @Success      200  {object}  model.Vakzin
-// @Router       /vakzin/{id} [post]
-func AddVazination(ctx *gin.Context) {
-	var newVazination model.Vakzin
+func AddVaccination(ctx *gin.Context) {
+
+	animalId, err := strconv.Atoi(ctx.Param("id"))
+
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "animalid must be a number"})
+		return
+	}
+
+	var newVazination model.Vaccine
 
 	if err := ctx.BindJSON(&newVazination); err != nil {
 		ctx.AbortWithError(http.StatusBadRequest, err)
 		return
 	}
 
+	service.AddVaccination(newVazination, int32(animalId))
+
 	ctx.IndentedJSON(http.StatusCreated, newVazination)
 }
-
-// service.FindPong()
