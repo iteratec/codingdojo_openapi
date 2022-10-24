@@ -43,6 +43,7 @@ func AddVazination(ctx *gin.Context) {
 	var newVazination model.Vakzin
 
 	if err := ctx.BindJSON(&newVazination); err != nil {
+		ctx.AbortWithError(http.StatusBadRequest, err)
 		return
 	}
 

@@ -29,7 +29,7 @@ func InitRouter() {
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())
 
-	v1 := router.Group("/api/v1/health")
+	v1 := router.Group("/v1")
 	{
 		vakzin := v1.Group("/vakzin")
 		{
