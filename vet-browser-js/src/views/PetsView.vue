@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <h1>This is a vet page</h1>
+    <h1>Sheltered animals</h1>
 
     <ul>
         <li v-for="item in items">{{ item.name }}</li>

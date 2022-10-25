@@ -19,8 +19,8 @@ import {RouterLink, RouterView} from "vue-router";</script>
       </div>
 
       <nav>
-        <RouterLink to="/">Vet</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/">Sheltered animals</RouterLink>
+        <RouterLink to="/required-vaccinations">Required vaccinactions</RouterLink>
       </nav>
     </div>
   </header>

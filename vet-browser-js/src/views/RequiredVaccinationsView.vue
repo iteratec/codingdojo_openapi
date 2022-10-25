@@ -1,6 +1,9 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <h1>Required vaccinations</h1>
+    <ul>
+        <li>Please replace required vaccinations here</li>
+    </ul>
   </div>
 </template>
 

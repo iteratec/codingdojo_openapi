@@ -10,9 +10,9 @@ const router = createRouter({
       component: PetsView,
     },
     {
-      path: "/about",
-      name: "about",
-      component: () => import("../views/AboutView.vue"),
+      path: "/required-vaccinations",
+      name: "required-vaccinations",
+      component: () => import("../views/RequiredVaccinationsView.vue"),
     },
   ],
 });
