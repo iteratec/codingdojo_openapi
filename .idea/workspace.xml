@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8ce7b34-d639-4696-8b33-4f3ab717eb20" name="Changes" comment="updated README.md" />
+    <list default="true" id="e8ce7b34-d639-4696-8b33-4f3ab717eb20" name="Changes" comment="check for Pet" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -144,7 +144,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666684757942</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="check for Pet">
+      <created>1666690627518</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1666690627518</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -167,7 +174,8 @@
     <MESSAGE value="added openapi: &quot;3.0.2&quot; version" />
     <MESSAGE value="added dao" />
     <MESSAGE value="updated README.md" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated README.md" />
+    <MESSAGE value="check for Pet" />
+    <option name="LAST_COMMIT_MESSAGE" value="check for Pet" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

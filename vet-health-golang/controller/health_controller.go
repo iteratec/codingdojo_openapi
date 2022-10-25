@@ -22,7 +22,7 @@ func GetVaccineById(ctx *gin.Context) {
 	ret := service.GetVaccineById(int32(animalId))
 
 	if ret == nil {
-		ctx.JSON(http.StatusNotFound, gin.H{"code": "PAGE_NOT_FOUND", "message": "Page not found"})
+		ctx.JSON(404, gin.H{"code": "VACCINE_NOT_FOUND", "message": "Vaccine not found"})
 		return
 	}
 
@@ -49,7 +49,7 @@ func AddVaccination(ctx *gin.Context) {
 	serviceError := service.AddVaccination(newVazination, int32(animalId))
 
 	if serviceError != nil {
-		ctx.AbortWithError(http.StatusBadRequest, serviceError)
+		ctx.AbortWithError(406, serviceError)
 		return
 	}
 
