@@ -14,20 +14,23 @@
 }
 </style>
 
-
 <script lang="ts">
 import {defineComponent} from "vue";
+import {Configuration} from "../generated-sources-openapi/vet-home/runtime";
+import {ShelterApi} from "../generated-sources-openapi/vet-home/apis/ShelterApi";
+import {BASEPATH_HOME} from "@/envconst";
 
 export default defineComponent({
   created: async function () {
-    /*
-    const test = new PetApi();
-    const petsByTag = await test.findPetsByTags({tags: ["dogs"]});
-    petsByTag.forEach((pet) => {
 
+    const conf = new Configuration({
+      basePath: BASEPATH_HOME
     });
-
-     */
+    const shelteredApi = new ShelterApi();
+    const shelteredAnimals = await shelteredApi.fetchShelteredAnimals();
+    shelteredAnimals.forEach((animal) => {
+      console.log(animal.name);
+    });
   }
 });
 </script>
