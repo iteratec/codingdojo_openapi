@@ -1,21 +1,25 @@
 <script setup lang="ts">
-import {RouterLink, RouterView} from "vue-router";
-import OpenApiWelcome from "./components/OpenApiWelcome.vue";</script>
+import {RouterLink, RouterView} from "vue-router";</script>
 
-<template >
+<template>
   <header>
     <img
-        alt="Vue logo"
+        alt="Iteratec logo"
         class="logo"
         src="https://www.iteratec.com/fileadmin/html/img/logo.png"
         width="125"
     />
 
     <div class="wrapper">
-      <OpenApiWelcome msg="Coding Dojo"/>
+      <div class="greetings">
+        <h1 class="green">Coding Dojo</h1>
+        <h3>
+          OpenAPI in Softwareteams
+        </h3>
+      </div>
 
       <nav>
-        <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/">Vet</RouterLink>
         <RouterLink to="/about">About</RouterLink>
       </nav>
     </div>
@@ -86,21 +90,26 @@ nav a:first-of-type {
     margin-top: 1rem;
   }
 }
-</style>
 
-<script lang="ts">
-import {defineComponent} from "vue";
+.greetings h1 {
+  font-weight: 500;
+  font-size: 2.6rem;
+  top: -10px;
+}
 
-export default defineComponent({
-  created: async function () {
-    /*
-    const test = new PetApi();
-    const petsByTag = await test.findPetsByTags({tags: ["dogs"]});
-    petsByTag.forEach((pet) => {
+.greetings h3 {
+  font-size: 1.2rem;
+}
 
-    });
+.greetings h1,
+.greetings h3 {
+  text-align: center;
+}
 
-     */
+@media (min-width: 1024px) {
+  .greetings h1,
+  .greetings h3 {
+    text-align: left;
   }
-});
-</script>
+}
+</style>

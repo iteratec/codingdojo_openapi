@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <h1>This is a pet page</h1>
+    <h1>This is a vet page</h1>
   </div>
 </template>
 
@@ -13,3 +13,21 @@
   }
 }
 </style>
+
+
+<script lang="ts">
+import {defineComponent} from "vue";
+
+export default defineComponent({
+  created: async function () {
+    /*
+    const test = new PetApi();
+    const petsByTag = await test.findPetsByTags({tags: ["dogs"]});
+    petsByTag.forEach((pet) => {
+
+    });
+
+     */
+  }
+});
+</script>
