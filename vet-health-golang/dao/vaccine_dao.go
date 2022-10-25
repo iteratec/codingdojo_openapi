@@ -15,6 +15,6 @@ func SaveVaccine(id int32, vaccine model.Vaccine) bool {
 	}
 }
 
-func FindVaccine(id int32) model.Vaccine {
-	return *vaccines[id]
+func FindVaccine(id int32) *model.Vaccine {
+	return vaccines[id]
 }
