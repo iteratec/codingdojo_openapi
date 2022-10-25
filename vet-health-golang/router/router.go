@@ -21,8 +21,8 @@ func InitRouter() {
 	{
 		vaccine := v1.Group("/vaccination")
 		{
-			vaccine.GET(":id", controller.GetVaccineById)
-			vaccine.POST(":id", controller.AddVaccination)
+			vaccine.GET(":animalType", controller.GetVaccineById)
+			vaccine.POST(":animalType", controller.AddVaccination)
 		}
 	}
 
