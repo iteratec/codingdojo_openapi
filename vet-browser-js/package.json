@@ -14,7 +14,7 @@
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "build:openapi:vet-health": "rimraf ./src/generated-sources-openapi/vet-health && openapi-generator-cli generate -i ../vet-health-golang/health-check-api.yaml -g typescript-fetch -o  ./src/generated-sources-openapi/vet-health --additional-properties=supportsES6=true,npmVersion=8.19.2,typescriptThreePlus=true",
-    "build:openapi:vet-home": "rimraf ./src/generated-sources-openapi/vet-home && openapi-generator-cli generate -i ../vet-home-spring/home-api.yaml -g typescript-fetch -o ./src/generated-sources-openapi/vet-home --additional-properties=supportsES6=true,npmVersion=8.19.2,typescriptThreePlus=true",
+    "build:openapi:vet-home": "rimraf ./src/generated-sources-openapi/vet-home && openapi-generator-cli generate -i ../vet-home-spring/home-api.yaml -g typescript-fetch -o ./src/generated-sources-openapi/vet-home --additional-properties=supportsES6=true,npmVersion=8.19.2,typescriptThreePlus=true,withInterfaces=true,withoutRuntimeChecks=true",
     "build:openapi": "npm run build:openapi:vet-health && npm run build:openapi:vet-home"
   },
   "dependencies": {
