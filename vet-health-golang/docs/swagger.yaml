@@ -1,0 +1,72 @@
+basePath: /api/v1
+definitions:
+  Vakzin:
+    properties:
+      name:
+        description: Name of the vakzination
+        type: string
+      vakzinationdate:
+        description: Date when the vakzination was done
+        example: "2021-10-18"
+        format: date
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: This is a sample server celler server.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Swagger Example API
+  version: "1.0"
+paths:
+  /vakzin/{id}:
+    get:
+      consumes:
+      - application/json
+      description: get vakzination by AnimalID
+      parameters:
+      - description: Animal ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Vakzin'
+      summary: Show an vakzination
+      tags:
+      - vakzin
+    post:
+      consumes:
+      - application/json
+      description: adds vakzination by AnimalID if animal is a Pet
+      parameters:
+      - description: Animal ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: query params
+        in: body
+        name: reqest
+        required: true
+        schema:
+          $ref: '#/definitions/Vakzin'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Vakzin'
+      summary: Adds an vakzination
+      tags:
+      - vakzin
+swagger: "2.0"

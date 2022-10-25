@@ -1,0 +1,106 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a sample server celler server.",
+        "title": "Swagger Example API",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {},
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/api/v1",
+    "paths": {
+        "/vakzin/{id}": {
+            "get": {
+                "description": "get vakzination by AnimalID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "vakzin"
+                ],
+                "summary": "Show an vakzination",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Animal ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Vakzin"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "adds vakzination by AnimalID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "vakzin"
+                ],
+                "summary": "Adds an vakzination",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Animal ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "query params",
+                        "name": "reqest",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.Vakzin"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Vakzin"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "model.Vakzin": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "description": "Name of the vakzination",
+                    "type": "string"
+                },
+                "vakzinationdate": {
+                    "description": "Date when the vakzination was done",
+                    "type": "string",
+                    "format": "date",
+                    "example": "2021-10-18"
+                }
+            }
+        }
+    }
+}
