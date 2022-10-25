@@ -31,7 +31,9 @@ public class ShelterDelegateImpl implements ShelterApiDelegate {
         if (animal.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(mapShelteredAnimal(animal.get()));
+        return ResponseEntity.status(HttpStatus.OK)
+                .headers(OpenApiTypeConversionHelper.getHttpHeadersConsumer())
+                .body(mapShelteredAnimal(animal.get()));
     }
 
     @Override
@@ -40,7 +42,10 @@ public class ShelterDelegateImpl implements ShelterApiDelegate {
         var animals = occupancyService.currentOccupants().stream()
                 .map(this::mapShelteredAnimal)
                 .collect(Collectors.toList());
-        return ResponseEntity.ok(animals);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .headers(OpenApiTypeConversionHelper.getHttpHeadersConsumer())
+                .body(animals);
     }
 
     @Override
@@ -49,7 +54,8 @@ public class ShelterDelegateImpl implements ShelterApiDelegate {
         try {
             var reservationId = occupancyService.reserveBoxFor(registerShelteredAnimalRequestDto.getName(),
                     OpenApiTypeConversionHelper.map(registerShelteredAnimalRequestDto.getBirthdate()));
-            return ResponseEntity.ok(new RegisterShelteredAnimal201ResponseDto().registeredId(reservationId));
+            return ResponseEntity.ok().headers(OpenApiTypeConversionHelper.getHttpHeadersConsumer())
+                    .body(new RegisterShelteredAnimal201ResponseDto().registeredId(reservationId));
         } catch (NoSpaceException e) {
             return ResponseEntity.status(HttpStatus.INSUFFICIENT_STORAGE).build();
         } catch (UnknownAnimalException e) {
