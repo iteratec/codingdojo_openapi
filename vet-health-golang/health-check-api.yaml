@@ -5,19 +5,19 @@ info:
 servers:
   - url: https://api.server.test/v1
 paths:
-  /vaccination/{id}:
+  /vaccination/{type}:
     get:
       tags:
       - vaccination
       summary: Show an vaccination
-      description: get vaccination by AnimalID
+      description: get vaccination by animal type
       parameters:
-      - name: id
+      - name: type
         in: path
-        description: Animal ID
+        description: Animal type
         required: true
         schema:
-          type: integer
+          type: string
       responses:
         200:
           description: OK
@@ -29,14 +29,14 @@ paths:
       tags:
       - vaccination
       summary: Adds an vaccination
-      description: adds vaccination by AnimalID if animal is a Pet
+      description: adds vaccination by animal type if animal is a Pet
       parameters:
-      - name: id
+      - name: type
         in: path
-        description: Animal ID
+        description: Animal type
         required: true
         schema:
-          type: integer
+          type: string
       requestBody:
         description: query params
         content:
