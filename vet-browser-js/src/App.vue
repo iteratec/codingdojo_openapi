@@ -1,19 +1,18 @@
 <script setup lang="ts">
 import {RouterLink, RouterView} from "vue-router";
-import HelloWorld from "./components/HelloWorld.vue";</script>
+import OpenApiWelcome from "./components/OpenApiWelcome.vue";</script>
 
-<template>
+<template >
   <header>
     <img
         alt="Vue logo"
         class="logo"
-        src="@/assets/logo.svg"
+        src="https://www.iteratec.com/fileadmin/html/img/logo.png"
         width="125"
-        height="125"
     />
 
     <div class="wrapper">
-      <HelloWorld msg="You did it!"/>
+      <OpenApiWelcome msg="Coding Dojo"/>
 
       <nav>
         <RouterLink to="/">Home</RouterLink>
@@ -91,20 +90,17 @@ nav a:first-of-type {
 
 <script lang="ts">
 import {defineComponent} from "vue";
-import {PetApi, PetStatusEnum} from "./generated-sources-openapi/example";
 
 export default defineComponent({
   created: async function () {
-    console.log(Math.random());
+    /*
     const test = new PetApi();
     const petsByTag = await test.findPetsByTags({tags: ["dogs"]});
     petsByTag.forEach((pet) => {
-      console.log(pet);
+
     });
-    const petsByStatus = await test.findPetsByStatus({status: PetStatusEnum.Available});
-    petsByStatus.forEach((pet) => {
-      console.log(pet);
-    });
+
+     */
   }
 });
 </script>
