@@ -8,3 +8,6 @@
 /vet-home-spring/generated/
 /vet-home-spring/.gradle/
 /vet-home-spring/.idea/
+
+.idea
+/.idea
