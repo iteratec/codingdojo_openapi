@@ -13,6 +13,10 @@ func GetVaccineByType(name string) *model.Vaccine {
 	return dao.FindVaccine(name)
 }
 
+func GetAllVaccineByType(name string) []model.Vaccine {
+	return dao.FindAllvaccines(name)
+}
+
 func AddVaccination(vaccine model.Vaccine, name string) error {
 	zentClient := zentral.NewAPIClient(zentral.NewConfiguration())
 	zentClient.ChangeBasePath(conf.Zentral_v2)
