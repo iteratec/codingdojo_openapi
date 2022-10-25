@@ -1,0 +1,170 @@
+openapi: 3.0.2
+info:
+  title: Zentral Vet Service
+  version: "2.0"
+servers:
+- url: https://api.server.test
+paths:
+  /v2/animals:
+    get:
+      operationId: fetchAnimalTypes
+      responses:
+        "200":
+          description: list containing details about multiple animals.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AnimalEntry'
+                x-content-type: application/json
+    post:
+      operationId: registerAnimalType
+      requestBody:
+        $ref: '#/components/requestBodies/AnimalCreation'
+      responses:
+        "201":
+          description: created animal reference
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_201'
+  /v2/animals/{id}:
+    get:
+      operationId: fetchAnimalTypeById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/AnimalId'
+      responses:
+        "200":
+          description: details about a specific animal.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnimalEntry'
+components:
+  schemas:
+    AnimalId:
+      type: integer
+      format: int32
+      example: 9212
+    AnimalRegistrationType:
+      type: string
+      default: Pet
+      enum:
+      - Pet
+      - Exotic
+    HusbandryRuleType:
+      type: string
+      default: Unlimited
+      enum:
+      - Unlimited
+      - RegistrationRequired
+      - PermissionRequired
+      - Forbidden
+    AnimalName:
+      maxLength: 36
+      minLength: 3
+      type: string
+      example: Cat
+    MaximumAge:
+      maximum: 3500
+      minimum: 1
+      type: integer
+      description: maximum age in years for a species.
+      example: 35
+    RegistrationDate:
+      type: string
+      description: creation date of this entry.
+      format: date-time
+      example: 2021-10-18T08:33:15.188+02:00
+    AnimalEntry:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/AnimalId'
+        name:
+          $ref: '#/components/schemas/AnimalName'
+        ownershipLimits:
+          $ref: '#/components/schemas/HusbandryRuleType'
+        ownershipLaw:
+          $ref: '#/components/schemas/AnimalRegistrationType'
+        registered:
+          $ref: '#/components/schemas/RegistrationDate'
+        expectedMaxAge:
+          $ref: '#/components/schemas/MaximumAge'
+      example:
+        expectedMaxAge: 35
+        ownershipLimits: ""
+        name: Cat
+        ownershipLaw: ""
+        registered: 2021-10-18T08:33:15.188+02:00
+        id: 9212
+    inline_response_201:
+      type: object
+      properties:
+        createdId:
+          $ref: '#/components/schemas/AnimalId'
+        name:
+          $ref: '#/components/schemas/AnimalName'
+      example:
+        name: Cat
+        createdId: 9212
+  responses:
+    CreatedAnimal:
+      description: created animal reference
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_response_201'
+    RegisteredAnimal:
+      description: details about a specific animal.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AnimalEntry'
+    ListOfRegisteredAnimals:
+      description: list containing details about multiple animals.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/AnimalEntry'
+            x-content-type: application/json
+  requestBodies:
+    AnimalCreation:
+      description: Inputs for the creation of a new entry in the library
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                $ref: '#/components/schemas/AnimalName'
+              maxAge:
+                $ref: '#/components/schemas/MaximumAge'
+              additionalInfo:
+                type: object
+                properties:
+                  aggressive:
+                    type: boolean
+                    default: false
+                  venomous:
+                    type: boolean
+                    default: false
+                  indigenous:
+                    type: boolean
+                    default: true
+                  livestock:
+                    type: boolean
+                    default: false
+                  mystical:
+                    type: boolean
+                    default: false
+      required: true
