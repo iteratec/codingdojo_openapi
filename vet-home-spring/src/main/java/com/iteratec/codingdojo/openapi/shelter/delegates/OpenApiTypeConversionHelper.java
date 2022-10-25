@@ -1,8 +1,11 @@
 package com.iteratec.codingdojo.openapi.shelter.delegates;
 
+import org.springframework.http.HttpHeaders;
+
 import java.time.*;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.function.Consumer;
 
 public class OpenApiTypeConversionHelper {
 
@@ -21,6 +24,10 @@ public class OpenApiTypeConversionHelper {
 
     static LocalDate map(Date date) {
         return LocalDate.of(date.getYear() + 1900, date.getMonth(), date.getDate());
+    }
+
+    static Consumer<HttpHeaders> getHttpHeadersConsumer() {
+        return (HttpHeaders httpHeaders) -> httpHeaders.add("Access-Control-Allow-Origin", "*");
     }
 
     private OpenApiTypeConversionHelper() {

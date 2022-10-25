@@ -27,13 +27,16 @@ public class AdoptionDelegateImpl implements AdoptionApiDelegate {
             var plz = adoptionService.adopt(animalId);
             log.info("Adoption approved for [{}] from [{}]", adoptAnimalRequestDto.getAdopteeName(),
                     adoptAnimalRequestDto.getAdopteePlz());
-            return ResponseEntity.ok(new PositiveAdoptionAnswerDto()
-                    .pickupShelterPlz(plz));
+            return ResponseEntity.status(HttpStatus.OK)
+                    .headers(OpenApiTypeConversionHelper.getHttpHeadersConsumer())
+                    .body(new PositiveAdoptionAnswerDto()
+                            .pickupShelterPlz(plz));
         } catch (UnknownAnimalException e) {
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(new NegativeAdoptionAnswerDto()
                     .rejectReason("The referenced animal is no longer in the shelter."));
         }
     }
+
 
     @Override
     public ResponseEntity<List<AdoptedAnimalDto>> fetchAdoptedAnimals() {
