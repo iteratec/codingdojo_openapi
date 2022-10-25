@@ -1,9 +1,8 @@
 <template>
   <div class="about">
     <h1>This is a vet page</h1>
-
     <ul>
-      <li v-for="item in items">{{ item.name }}</li>
+      <li v-bind:key="item.id" v-for="item in items">{{ item.name }}</li>
     </ul>
   </div>
 </template>
@@ -20,8 +19,9 @@
 
 <script lang="ts">
 import {defineComponent} from "vue";
-import {Configuration, ShelterApi} from "@/generated-sources-openapi/vet-home";
 import {BASEPATH_HOME} from "@/envconst";
+import {Configuration} from "@/generated-sources-openapi/vet-home/runtime";
+import {ShelterApi} from "@/generated-sources-openapi/vet-home/apis";
 
 export default defineComponent({
   data() {
