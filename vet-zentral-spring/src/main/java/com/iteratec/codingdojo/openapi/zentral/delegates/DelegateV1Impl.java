@@ -18,9 +18,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
+@Profile("V1")
 @Slf4j
 @Validated
-@Profile("V1")
 public class DelegateV1Impl implements AnimalsApiDelegate {
 
     @Autowired

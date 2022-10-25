@@ -8,3 +8,9 @@
 /vet-home-spring/generated/
 /vet-home-spring/.gradle/
 /vet-home-spring/.idea/
+
+/vet-browser-js/node_modules/
+/vet-browser-js/.idea/
+
+.idea
+/.idea
