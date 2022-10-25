@@ -5,10 +5,10 @@ info:
 servers:
   - url: https://api.server.test/v1
 paths:
-  /vaccine/{id}:
+  /vaccination/{id}:
     get:
       tags:
-      - vaccine
+      - vaccination
       summary: Show an vaccination
       description: get vaccination by AnimalID
       parameters:
@@ -24,10 +24,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Vakzin'
+                $ref: '#/components/schemas/Vaccination'
     post:
       tags:
-      - vaccine
+      - vaccination
       summary: Adds an vaccination
       description: adds vaccination by AnimalID if animal is a Pet
       parameters:
@@ -42,7 +42,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Vaccine'
+              $ref: '#/components/schemas/Vaccination'
         required: true
       responses:
         200:
@@ -50,11 +50,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Vaccine'
+                $ref: '#/components/schemas/Vaccination'
       x-codegen-request-body-name: reqest
 components:
   schemas:
-    Vaccine:
+    Vaccination:
       type: object
       properties:
         name:
