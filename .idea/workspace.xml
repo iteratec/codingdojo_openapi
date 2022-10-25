@@ -4,13 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8ce7b34-d639-4696-8b33-4f3ab717eb20" name="Changes" comment="added openapi: &quot;3.0.2&quot; version">
+    <list default="true" id="e8ce7b34-d639-4696-8b33-4f3ab717eb20" name="Changes" comment="added dao">
+      <change afterPath="$PROJECT_DIR$/vet-health-golang/conf/basePath.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vet-health-golang/dao/vaccine_dao.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vet-health-golang/model/vaccine_model.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vet-health-golang/zentral_v2/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vet-health-golang/zentral_v2/.swagger-codegen-ignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vet-health-golang/zentral_v2/.swagger-codegen/VERSION" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vet-health-golang/zentral_v2/.travis.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vet-health-golang/zentral_v2/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vet-health-golang/zentral_v2/api/swagger.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vet-health-golang/zentral_v2/api_default.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vet-health-golang/zentral_v2/client.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vet-health-golang/zentral_v2/configuration.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vet-health-golang/zentral_v2/docs/AnimalEntry.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vet-health-golang/zentral_v2/docs/AnimalRegistrationType.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vet-health-golang/zentral_v2/docs/DefaultApi.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vet-health-golang/zentral_v2/docs/HusbandryRuleType.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vet-health-golang/zentral_v2/docs/InlineResponse201.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vet-health-golang/zentral_v2/git_push.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vet-health-golang/zentral_v2/model_animal_entry.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vet-health-golang/zentral_v2/model_animal_registration_type.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vet-health-golang/zentral_v2/model_husbandry_rule_type.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vet-health-golang/zentral_v2/model_inline_response_201.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vet-health-golang/zentral_v2/response.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vet-health-golang/zentral_v2/zentral-v2.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vet-health-golang/controller/health_controller.go" beforeDir="false" afterPath="$PROJECT_DIR$/vet-health-golang/controller/health_controller.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vet-health-golang/model/vakzin_model.go" beforeDir="false" afterPath="$PROJECT_DIR$/vet-health-golang/model/vakzin_model.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vet-health-golang/rest/rest_zentral.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vet-health-golang/router/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/vet-health-golang/router/router.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vet-health-golang/service/health_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/vet-health-golang/service/health_service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vet-health-golang/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/vet-health-golang/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,7 +121,7 @@
       <option name="generatorPath" value="https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/5.0.0/openapi-generator-cli-5.0.0.jar" />
       <option name="jdkPath" value="" />
       <option name="language" value="java" />
-      <option name="specificationPath" value="$PROJECT_DIR$/vet-zentral-spring/zentral-v2.yaml" />
+      <option name="specificationPath" value="$PROJECT_DIR$/vet-health-golang/health-check-api.yaml" />
       <method v="2" />
     </configuration>
   </component>
@@ -137,7 +157,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666545765488</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="added dao">
+      <created>1666644153619</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1666644153619</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -158,7 +185,8 @@
     <MESSAGE value="init health + tryout" />
     <MESSAGE value="added swagger" />
     <MESSAGE value="added openapi: &quot;3.0.2&quot; version" />
-    <option name="LAST_COMMIT_MESSAGE" value="added openapi: &quot;3.0.2&quot; version" />
+    <MESSAGE value="added dao" />
+    <option name="LAST_COMMIT_MESSAGE" value="added dao" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
